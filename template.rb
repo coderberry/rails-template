@@ -1,4 +1,4 @@
-RAILS_REQUIREMENT = "~> 5.2.0".freeze
+RAILS_REQUIREMENT = "~> 5.2.1".freeze
 
 def apply_template!
   assert_minimum_rails_version
@@ -7,12 +7,6 @@ def apply_template!
   add_template_repository_to_source_path
 
   template "Gemfile.tt", force: true
-
-  if apply_capistrano?
-    template "DEPLOYMENT.md.tt"
-    template "PROVISIONING.md.tt"
-  end
-
   template "README.md.tt", force: true
   remove_file "README.rdoc"
 
@@ -20,15 +14,16 @@ def apply_template!
   copy_file "editorconfig", ".editorconfig"
   copy_file "gitignore", ".gitignore", force: true
   copy_file "overcommit.yml", ".overcommit.yml"
+  copy_file "prettierrc.yml", ".prettierrc.yml"
+  template "standard.yml.tt", ".standard.yml", force: true
   template "ruby-version.tt", ".ruby-version", force: true
+  template "tool-versions.tt", ".tool-versions", force: true
   copy_file "simplecov", ".simplecov"
 
-  copy_file "Capfile" if apply_capistrano?
   copy_file "Guardfile"
   copy_file "Procfile"
 
   apply "Rakefile.rb"
-  apply "config.ru.rb"
   apply "app/template.rb"
   apply "bin/template.rb"
   apply "circleci/template.rb"
@@ -50,11 +45,10 @@ def apply_template!
     annotate brakeman bundler bundler-audit guard rubocop sidekiq
     terminal-notifier
   ]
-  binstubs.push("capistrano", "unicorn") if apply_capistrano?
   run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
 
   template "rubocop.yml.tt", ".rubocop.yml"
-  run_rubocop_autocorrections
+  run_standardize
 
   unless any_local_git_commits?
     git add: "-A ."
@@ -81,7 +75,7 @@ def add_template_repository_to_source_path
     at_exit { FileUtils.remove_entry(tempdir) }
     git clone: [
       "--quiet",
-      "https://github.com/mattbrictson/rails-template.git",
+      "https://github.com/coderberry/rails-template.git",
       tempdir
     ].map(&:shellescape).join(" ")
 
@@ -199,8 +193,8 @@ def run_with_clean_bundler_env(cmd)
   end
 end
 
-def run_rubocop_autocorrections
-  run_with_clean_bundler_env "bin/rubocop -a --fail-level A > /dev/null || true"
+def run_standardize
+  run_with_clean_bundler_env "bin/standardize"
 end
 
 def create_initial_migration

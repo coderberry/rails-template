@@ -1,0 +1,32 @@
+# IMPORTANT: All application enums should be defined in this file
+#
+# They will be made available to the application via: config/initializers/enums.rb
+# ...and will be exposed uner the ENUMS module
+#
+# NOTE: Entries in this file can be either key/value or a simple list
+#
+# Examples
+#
+#   RATINGS:
+#     gold: happy
+#     silver: satisfied
+#     bronze: sad
+#
+#   The YAML above will be converted to the following enums
+#
+#   pry>ENUMS::RATINGS::GOLD       # happy
+#   pry>ENUMS::RATINGS::HAPPY      # gold
+#   pry>ENUMS::RATINGS::SILVER     # satisfied
+#   pry>ENUMS::RATINGS::SATISFIED  # silver
+#   pry>ENUMS::RATINGS::BRONZE     # sad
+#   pry>ENUMS::RATINGS::SAD        # bronze
+#
+#   ENUMs also supports the following helper methods
+#
+#   pry>ENUMS::RATINGS.keys             # [gold, silver, bronze]
+#   pry>ENUMS::RATINGS.values           # [happy, satisfied, sad]
+#   pry>ENUMS::RATINGS.happy? :gold     # true
+#   pry>ENUMS::RATINGS.happy? :bronze   # false
+#   pry>ENUMS::RATINGS["happy"]         # gold
+#   pry>ENUMS::RATINGS["gold"]          # happy
+#

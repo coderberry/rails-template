@@ -14,4 +14,10 @@ module LayoutHelper
     output = render(file: "layouts/#{layout}")
     self.output_buffer = ActionView::OutputBuffer.new(output)
   end
+
+  def classes(options = {})
+    list = []
+    options.each { |k, v| list << k if v }
+    list.join " "
+  end
 end
