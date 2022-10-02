@@ -1,0 +1,5 @@
+#!/bin/bash
+
+bundle exec magic_frozen_string_literal
+bin/organize_gemfile
+bundle exec standardrb --fix

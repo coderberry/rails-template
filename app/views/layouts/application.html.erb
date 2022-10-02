@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html class="antialiased">
+  <%= render "shared/head" %>
+
+  <body class="font-sans font-normal leading-normal text-gray-800 bg-white">
+    <%= turbo_reflex_frame_tag %>
+    <%= render "shared/flash_notice" %>
+    <%= render "shared/navbar" %>
+
+    <main class="px-4 lg:px-10">
+      <%= content_for?(:content) ? yield(:content) : yield %>
+
+      <%= render "shared/footer" %>
+    </main>
+  </body>
+</html>
