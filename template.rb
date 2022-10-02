@@ -80,7 +80,7 @@ def add_users
 end
 
 def copy_templates
-  copy_file ".env"
+  copy_file "env"
   copy_file "Procfile.dev"
   copy_file "jsconfig.json"
   copy_file "tailwind.config.js"
@@ -98,6 +98,7 @@ def copy_templates
 
   run "chmod +x bin/*"
   run "mv github .github"
+  run "mv env .en"
 end
 
 def add_rspec
