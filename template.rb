@@ -80,7 +80,6 @@ def add_users
 end
 
 def copy_templates
-  copy_file "README.md", force: true
   copy_file ".env"
   copy_file "Procfile.dev"
   copy_file "jsconfig.json"
