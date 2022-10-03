@@ -1,10 +1,6 @@
 require "fileutils"
 require "shellwords"
 
-def source_paths
-  [__dir__]
-end
-
 def add_template_repository_to_source_path
   if __FILE__ =~ %r{\Ahttps?://}
     require 'tmpdir'
@@ -80,7 +76,6 @@ def add_users
 end
 
 def copy_templates
-  copy_file "env"
   copy_file "Procfile.dev"
   copy_file "jsconfig.json"
   copy_file "tailwind.config.js"
@@ -98,7 +93,10 @@ def copy_templates
 
   run "chmod +x bin/*"
   run "mv github .github"
-  run "mv env .en"
+
+  in_root do
+    run "touch .env"
+  end
 end
 
 def add_rspec

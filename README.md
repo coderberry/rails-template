@@ -4,7 +4,23 @@ An opinionated Rails 7+ application template.
 
 ### Included gems
 
-TBD
+- arel-helpers
+- bullet
+- devise
+- friendly_id
+- name_of_person
+- sidekiq
+- vite_rails
+- whoop
+- annotate
+- magic_frozen_string_literal
+- codecov
+- organize_gemfile
+- simplecov
+- sord
+- standard
+- factory_bot_rails
+- rspec-rails
 
 ## How it works
 
