@@ -15,6 +15,7 @@ An opinionated Rails 7+ application template.
 - annotate
 - magic_frozen_string_literal
 - codecov
+- model_probe
 - organize_gemfile
 - simplecov
 - sord

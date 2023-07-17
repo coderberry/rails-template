@@ -31,6 +31,8 @@ def add_gems
   gem "friendly_id"
   gem "name_of_person"
   gem "sidekiq"
+  gem "turbo_boost-commands"
+  gem "turbo_boost-streams"
   gem "vite_rails"
   gem "whoop"
 
@@ -38,6 +40,7 @@ def add_gems
     gem "annotate"
     gem "magic_frozen_string_literal"
     gem "codecov"
+    gem "model_probe"
     gem "organize_gemfile"
     gem "simplecov"
     gem "sord"
@@ -115,29 +118,32 @@ def add_javascript
     sass
     @hotwired/stimulus
     @hotwired/turbo-rails
+    @shoelace-style/shoelace
     tailwindcss
+    @turbo-boost/commands --exact
+    @turbo-boost/streams --exact
     vite
   ]
 
   dev_packages = %w[
-    autoprefixer
-    postcss
-    eslint
-    prettier
-    eslint-plugin-prettier
-    eslint-config-prettier
-    eslint-plugin-tailwindcss
-    path
-    vite-plugin-ruby
-    vite-plugin-stimulus-hmr
-    vite-plugin-full-reload
     @tailwindcss/forms
     @tailwindcss/typography
     @tailwindcss/aspect-ratio
+    autoprefixer
+    eslint
+    eslint-config-prettier
+    eslint-plugin-prettier
+    eslint-plugin-tailwindcss
+    path
+    postcss
+    prettier
+    rollup-plugin-copy
     stimulus-vite-helpers
     tailwindcss
     typescript
-    turbo_reflex
+    vite-plugin-ruby
+    vite-plugin-stimulus-hmr
+    vite-plugin-full-reload
   ]
 
   run "yarn add #{packages.join(' ')}"
@@ -205,7 +211,8 @@ def add_bullet
 end
 
 def run_cleanup
-  run "bin/standardize"
+  run "bundle exec magic_frozen_string_literal"
+  run "bundle exec standardrb --fix-unsafely"
 end
 
 def verbose(message, color: :yellow, &block)

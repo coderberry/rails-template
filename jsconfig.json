@@ -9,14 +9,21 @@
     "sourceMap": true,
     "strict": true,
     "paths": {
-      "@/*": ["app/*"],
-      "@/component*": ["app/frontend/components/*"]
-    }
-  },
-  "include": ["app/**/*", "app/frontend/components/*"],
-  "exclude": [
-    "**/dist",
-    "**/node_modules",
-    "**/test"
-  ]
+      "@/*": [
+        "app/*"
+      ],
+      "@/component*": [
+        "app/frontend/components/*"
+      ]
+    },
+    "include": [
+      "app/**/*",
+      "app/frontend/components/*"
+    ],
+    "exclude": [
+      "**/dist",
+      "**/node_modules",
+      "**/test"
+    ]
+  }
 }
