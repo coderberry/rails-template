@@ -137,13 +137,11 @@ def add_javascript
     path
     postcss
     prettier
-    rollup-plugin-copy
     stimulus-vite-helpers
     tailwindcss
     typescript
-    vite-plugin-ruby
-    vite-plugin-stimulus-hmr
-    vite-plugin-full-reload
+    vite-plugin-rails
+    vite-plugin-static-copy
   ]
 
   run "yarn add #{packages.join(' ')}"

@@ -10,3 +10,4 @@ const paths = {
 
 let rootUrl = `/vite${paths[mode]}`
 setBasePath(rootUrl)
+
